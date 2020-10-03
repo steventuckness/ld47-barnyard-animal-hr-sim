@@ -3,7 +3,7 @@ import { Resume } from './resume';
 
 export interface State {
   hired: Employee[];
-  currentResume: ;
+  currentResume: Resume;
   money: number;
   currentDay: number;
   companyHapiness: number;
