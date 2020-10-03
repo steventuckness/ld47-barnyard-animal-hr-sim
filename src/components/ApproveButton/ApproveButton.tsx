@@ -3,13 +3,19 @@ import React from 'react';
 import Button from '../Button/Button';
 import styles from './ApproveButton.module.css';
 
-function handleClick() {
-  console.log('Approve!');
+function handleClick(resumeId: number) {
+  console.log(`Approved resume ${resumeId}!`);
 }
 
-const ApproveButton: React.FC = () => (
+interface ApproveButtonProps {
+  resumeId: number;
+}
+
+const ApproveButton: React.FC<ApproveButtonProps> = (
+  props: ApproveButtonProps
+) => (
   <Button
-    handleClick={handleClick}
+    handleClick={() => handleClick(props.resumeId)}
     label="Approve!"
     classes={[styles.ApproveButton]}
   ></Button>

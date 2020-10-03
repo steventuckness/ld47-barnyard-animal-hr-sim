@@ -3,13 +3,17 @@ import React from 'react';
 import Button from '../Button/Button';
 import styles from './DenyButton.module.css';
 
-function handleClick() {
-  console.log('Denied!');
+function handleClick(resumeId: number) {
+  console.log(`Denied resume ${resumeId}!`);
 }
 
-const DenyButton: React.FC = () => (
+interface DenyButtonProps {
+  resumeId: number;
+}
+
+const DenyButton: React.FC<DenyButtonProps> = (props: DenyButtonProps) => (
   <Button
-    handleClick={handleClick}
+    handleClick={() => handleClick(props.resumeId)}
     label="Deny!"
     classes={[styles.DenyButton]}
   ></Button>

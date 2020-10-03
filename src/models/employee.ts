@@ -1,14 +1,6 @@
-import { Personality } from '../types/personality';
-import { Species } from '../types/species';
-import { Skill } from './skill';
-import { Resume } from './resume';
+import { Candidate } from './candidate';
 
-export interface Employee {
-  name: string; 
-  picture: string;
-  species: Species;
-  skills: Skill[];
-  personality: Personality[];
+export interface Employee extends Candidate {
+  employeeId: number;
   salary: number; // per day
-  resume: Resume;
 }

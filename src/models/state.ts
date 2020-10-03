@@ -1,9 +1,9 @@
+import { Candidate } from './candidate';
 import { Employee } from './employee';
-import { Resume } from './resume';
 
 export interface State {
   hired: Employee[];
-  currentResume: Resume;
+  candidate: Candidate;
   money: number;
   currentDay: number;
   companyHapiness: number;

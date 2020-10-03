@@ -1,1 +1,3 @@
-export interface Resume {};
+export interface Resume {
+  resumeId: number;
+}
