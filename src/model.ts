@@ -17,8 +17,8 @@ export type Personality = "extrovert" | "introvert" | "thinker" | "feeler";
  * Employees with higher skill values increase productivity.
  */
 export interface Skill {
-    name: SkillName;
-    value: number;
+  name: SkillName;
+  value: number;
 }
 
 /**
@@ -26,11 +26,26 @@ export interface Skill {
  */
 export type Species = "lion" | "chicken" | "bear";
 
+export interface Resume {
+};
+
 export interface Employee {
-    name: string; 
-    picture: string;
-    species: Species;
-    skills: Skill[];
-    personality: Personality[];
-    salary: number;
+  name: string; 
+  picture: string;
+  species: Species;
+  skills: Skill[];
+  personality: Personality[];
+  salary: number; // per day
+  resume: Resume;
 }
+
+
+export interface State {
+  hired: Employee[];
+  currentResume: Employee;
+  money: number;
+  currentDay: number;
+  companyHapiness: number;
+  companyProductivity: number;
+}
+
