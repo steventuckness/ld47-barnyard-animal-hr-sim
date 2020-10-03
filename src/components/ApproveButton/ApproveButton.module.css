@@ -1,1 +1,4 @@
-.ApproveButton {}
+.ApproveButton {
+  background-color: lightgreen;
+  color: black;
+}

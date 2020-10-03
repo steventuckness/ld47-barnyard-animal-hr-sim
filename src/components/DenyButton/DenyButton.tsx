@@ -1,10 +1,18 @@
 import React from 'react';
+
+import Button from '../Button/Button';
 import styles from './DenyButton.module.css';
 
+function handleClick() {
+  console.log('Denied!');
+}
+
 const DenyButton: React.FC = () => (
-  <div className={styles.DenyButton} data-testid="DenyButton">
-    DenyButton Component
-  </div>
+  <Button
+    handleClick={handleClick}
+    label="Deny!"
+    classes={[styles.DenyButton]}
+  ></Button>
 );
 
 export default DenyButton;

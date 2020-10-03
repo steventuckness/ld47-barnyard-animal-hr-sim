@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ApproveButton from '../ApproveButton/ApproveButton';
 import DenyButton from '../DenyButton/DenyButton';
 import Employee from '../Employee/Employee';
@@ -21,11 +22,10 @@ const Game: React.FC = () => {
 
   return (<div className={styles.Game} data-testid="Game">
     Game Component
-
     <Resume></Resume>
     <Employee></Employee>
-    <ApproveButton></ApproveButton>
     <DenyButton></DenyButton>
+    <ApproveButton></ApproveButton>
     <HappinessMeter></HappinessMeter>
   </div>)
 };

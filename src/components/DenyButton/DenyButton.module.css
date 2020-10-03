@@ -1,1 +1,4 @@
-.DenyButton {}
+.DenyButton {
+  background-color: red;
+  color: black;
+}
