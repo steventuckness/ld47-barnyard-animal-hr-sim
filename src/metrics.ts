@@ -1,4 +1,4 @@
-import { Employee } from "./model";
+import { Employee } from "./models/employee";
 
 /**
  * An employee is happy if she is around people of the same species and
@@ -6,7 +6,7 @@ import { Employee } from "./model";
  */
 export const employeeHappiness = 
   (hired: Employee[]) => (employee: Employee): number => {
-  const   
+    return 0;
 };
 
 /**
@@ -23,4 +23,5 @@ export const dailyExpenses = (hired: Employee[]) : number => 0;
 /**
  * Calculates the daily profit based on the employees currently at the company. The skill determines the income, and the sum of salaries determines the expenses.
  */
-export const dailyProfit = (hired: Employee[]): number => dailyIncome(hired) - dailyExpenses(hired);
+export const dailyProfit = (hired: Employee[]): number => 
+  dailyIncome(hired) - dailyExpenses(hired);
