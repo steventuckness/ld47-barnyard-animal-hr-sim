@@ -5,7 +5,6 @@ import { Skill } from './skill';
 
 export interface Candidate {
     name: string;
-    picture: string;
     species: Species;
     skills: Skill[];
     personality: Personality[];

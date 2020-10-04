@@ -17,8 +17,6 @@ const dayIntervalInSeconds = 3;
 type MyState = {
   money: number,
   currentDay: number,
-  // companyHappiness: number,
-  // companyProductivity: number,
   candidate: CandidateModel, // TODO:
   employees: Employee[]
 }
@@ -30,8 +28,6 @@ class Game extends React.Component<{}, MyState> {
     this.state = {
       money: 1000,
       currentDay: 0,
-      // companyHappiness: 3,
-      // companyProductivity: 1,
       candidate: generateCandidate(),
       employees: [
         {
@@ -43,7 +39,6 @@ class Game extends React.Component<{}, MyState> {
         employeeId: 0,
         resume: { resumeId: 0},
         name: 'bill',
-        picture: '',
         species: 'sheep'
       } as Employee,
       {
@@ -55,15 +50,11 @@ class Game extends React.Component<{}, MyState> {
         employeeId: 1,
         resume: { resumeId: 1},
         name: 'jill',
-        picture: '',
         species: 'swan'
       } as Employee
     ]
     }
   }
-
-  // TODO: move to candidate component
-  //<img width="100" src={this.state.candidate.picture}></img>
 
   render() {
     return (
@@ -71,13 +62,9 @@ class Game extends React.Component<{}, MyState> {
         <Day currentDay={this.state.currentDay}></Day>
         Funds: ${this.state.money}
         <HappinessMeter happiness={companyHappiness(this.state.employees)}></HappinessMeter>
-        <div>
-            <div className='split left'>
-                <Candidate candidate={this.state.candidate}></Candidate>
-            </div>
-            <div className='split right'>
-                <Resume resume={this.state.candidate.resume}></Resume>
-            </div>
+        <div className={styles.CandidateAndResume}>    
+          <Candidate candidate={this.state.candidate}></Candidate>
+          <Resume resume={this.state.candidate.resume}></Resume>  
         </div>
         <DenyButton resumeId={this.state.candidate.resume.resumeId}></DenyButton>
         <ApproveButton resumeId={this.state.candidate.resume.resumeId}></ApproveButton>
