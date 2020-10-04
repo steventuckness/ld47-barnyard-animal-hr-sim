@@ -49,7 +49,7 @@ class Game extends React.Component<{}, MyState> {
         skills: [
           { name: 'programmer', value: 48 }
         ],
-        employeeId: 0,
+        employeeId: 1,
         resume: { resumeId: 1},
         name: 'jill',
         picture: '',
