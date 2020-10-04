@@ -4,7 +4,11 @@ export interface Resume {
         date: Date;
         company: string;
         position: string;
+        tasks: string[];
     }>
-    education: any[];
-    honors: any[];
+    education: Array<{
+        date: Date;
+        school: string;
+        tasks: string[];
+    }>;
 };
