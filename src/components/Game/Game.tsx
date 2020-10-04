@@ -2,21 +2,22 @@ import React from 'react';
 
 import { generateCandidate } from '../../generate_candidate';
 import { companyHappiness, dailyProfit } from '../../metrics';
-import { Candidate } from '../../models/candidate';
 import Employee from '../../models/employee';
+import { Candidate as CandidateModel } from '../../models/candidate';
 import ApproveButton from '../ApproveButton/ApproveButton';
+import Candidate from '../Candidate/Candidate';
 import Day from '../Day/Day';
 import DenyButton from '../DenyButton/DenyButton';
 import HappinessMeter from '../HappinessMeter/HappinessMeter';
 import Resume from '../Resume/Resume';
 import styles from './Game.module.css';
 
+const dayIntervalInSeconds = 3;
+
 type MyState = {
   money: number,
   currentDay: number,
-  // companyHappiness: number,
-  companyProductivity: number,
-  candidate: Candidate,
+  candidate: CandidateModel, // TODO:
   employees: Employee[]
 }
 
@@ -27,8 +28,6 @@ class Game extends React.Component<{}, MyState> {
     this.state = {
       money: 1000,
       currentDay: 0,
-      // companyHappiness: 3,
-      companyProductivity: 1,
       candidate: generateCandidate(),
       employees: [
         {
@@ -40,7 +39,6 @@ class Game extends React.Component<{}, MyState> {
         employeeId: 0,
         resume: { resumeId: 0},
         name: 'bill',
-        picture: '',
         species: 'sheep'
       } as Employee,
       {
@@ -52,7 +50,6 @@ class Game extends React.Component<{}, MyState> {
         employeeId: 1,
         resume: { resumeId: 1},
         name: 'jill',
-        picture: '',
         species: 'swan'
       } as Employee
     ]
@@ -65,8 +62,10 @@ class Game extends React.Component<{}, MyState> {
         <Day currentDay={this.state.currentDay}></Day>
         Funds: ${this.state.money}
         <HappinessMeter happiness={companyHappiness(this.state.employees)}></HappinessMeter>
-        <img width="100" src={this.state.candidate.picture}></img>
-        <Resume resume={this.state.candidate.resume}></Resume>
+        <div className={styles.CandidateAndResume}>    
+          <Candidate candidate={this.state.candidate}></Candidate>
+          <Resume resume={this.state.candidate.resume}></Resume>  
+        </div>
         <DenyButton resumeId={this.state.candidate.resume.resumeId}></DenyButton>
         <ApproveButton resumeId={this.state.candidate.resume.resumeId}></ApproveButton>
       </div>
@@ -76,7 +75,7 @@ class Game extends React.Component<{}, MyState> {
   componentDidMount(): void {
     setInterval(() => {
      this.goToNextDay();
-    }, 3000);
+    }, dayIntervalInSeconds * 1000);
   }
 
   goToNextDay(): void {
