@@ -38,9 +38,9 @@ const sumFreqs = (dictA: FreqDict, dictB: FreqDict): FreqDict => {
 /**
  * Divides all frequencies by a scalar.
  */
-const divideFreqs = (dict: FreqDict, num: number): FreqDict => 
+const divideFreqs = (dict: FreqDict, num: number): FreqDict =>
   Object.keys(dict).reduce(
-    (res, k) => ({...res, [k]: res[k] / num}), {} as FreqDict);
+    (res, k) => ({...res, [k]: dict[k] / num}), {} as FreqDict);
 
 /**
  * Frequency table of all personalities in the company.

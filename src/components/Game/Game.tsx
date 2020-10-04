@@ -42,6 +42,18 @@ class Game extends React.Component<{}, MyState> {
         name: 'bill',
         picture: '',
         species: 'sheep'
+      } as Employee,
+      {
+        personality: ['extrovert'],
+        salary: 100,
+        skills: [
+          { name: 'programmer', value: 48 }
+        ],
+        employeeId: 0,
+        resume: { resumeId: 1},
+        name: 'jill',
+        picture: '',
+        species: 'swan'
       } as Employee
     ]
     }
