@@ -10,4 +10,5 @@ export interface Candidate {
     skills: Skill[];
     personality: Personality[];
     resume: Resume;
+    salary: number;
 }
