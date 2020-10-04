@@ -77,9 +77,9 @@ export const employeeHappiness =
 };
 
 /**
- * The overall company hapiness is the average hapiness of a single employee.
+ * The overall company happiness is the average happiness of a single employee.
  */
-export const companyHapiness = (hired: Employee[]): number =>
+export const companyHappiness = (hired: Employee[]): number =>
   hired.map(employeeHappiness(hired)).reduce((a, b) => a + b) / hired.length;
 
 /**
