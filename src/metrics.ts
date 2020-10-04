@@ -7,7 +7,7 @@ type FreqDict = {[id: string]: number};
  */
 const filterDictByKeys = (keys: string[], dict: FreqDict) =>
   Object.keys(dict).reduce(
-    (result, key) => keys.indexOf(key) == -1 ? result : {...result, [key]: dict[key] },
+    (result, key) => keys.indexOf(key) === -1 ? result : {...result, [key]: dict[key] },
     {} as FreqDict
   );
 
@@ -87,9 +87,9 @@ export const companyHappiness = (hired: Employee[]): number =>
  * as the skills are varied. The resulting number is arbitrary and
  * should be multiplied by a constant later to balance the game.
  */
-export const dailyIncome = (hired: Employee[]) : number => {
-  return 0;
-};
+export const dailyIncome = (hired: Employee[]) : number =>
+  // TODO: add multiplyer constants
+  hired.reduce((result, emp) => result + emp.skills.reduce((result2, skill) => result2 + skill.value, 0), 0);
 
 /**
  * The sum of all salaries in the company.

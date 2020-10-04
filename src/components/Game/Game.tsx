@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { generateCandidate } from '../../generate_candidate';
+import { companyHappiness, dailyProfit } from '../../metrics';
 import { Candidate } from '../../models/candidate';
+import Employee from '../../models/employee';
 import ApproveButton from '../ApproveButton/ApproveButton';
 import Day from '../Day/Day';
 import DenyButton from '../DenyButton/DenyButton';
-import Employee from '../Employee/Employee';
 import HappinessMeter from '../HappinessMeter/HappinessMeter';
 import Resume from '../Resume/Resume';
 import styles from './Game.module.css';
@@ -13,9 +14,10 @@ import styles from './Game.module.css';
 type MyState = {
   money: number,
   currentDay: number,
-  companyHapiness: number,
+  // companyHappiness: number,
   companyProductivity: number,
   candidate: Candidate,
+  employees: Employee[]
 }
 
 class Game extends React.Component<{}, MyState> {
@@ -23,11 +25,25 @@ class Game extends React.Component<{}, MyState> {
     super(props);
 
     this.state = {
-      money: 0,
+      money: 1000,
       currentDay: 0,
-      companyHapiness: 0,
-      companyProductivity: 0,
+      // companyHappiness: 3,
+      companyProductivity: 1,
       candidate: generateCandidate(),
+      employees: [
+        {
+        personality: ['extrovert'],
+        salary: 128,
+        skills: [
+          { name: 'programmer', value: 32 }
+        ],
+        employeeId: 0,
+        resume: { resumeId: 0},
+        name: 'bill',
+        picture: '',
+        species: 'sheep'
+      } as Employee
+    ]
     }
   }
 
@@ -35,12 +51,12 @@ class Game extends React.Component<{}, MyState> {
     return (
       <div className={styles.Game} data-testid="Game">
         <Day currentDay={this.state.currentDay}></Day>
+        Funds: ${this.state.money}
+        <HappinessMeter happiness={companyHappiness(this.state.employees)}></HappinessMeter>
         <img width="100" src={this.state.candidate.picture}></img>
         <Resume></Resume>
-        <Employee></Employee>
         <DenyButton resumeId={this.state.candidate.resume.resumeId}></DenyButton>
         <ApproveButton resumeId={this.state.candidate.resume.resumeId}></ApproveButton>
-        <HappinessMeter></HappinessMeter>
       </div>
     );
   }
@@ -48,12 +64,15 @@ class Game extends React.Component<{}, MyState> {
   componentDidMount(): void {
     setInterval(() => {
      this.goToNextDay();
-    }, 1000);
+    }, 3000);
   }
 
   goToNextDay(): void {
-    this.setState({...this.state, currentDay: this.state.currentDay + 1});
-    // TODO:
+    this.setState(
+      {
+        currentDay: this.state.currentDay + 1,
+        money: this.state.money + dailyProfit(this.state.employees)
+      });
   }
 };
 
