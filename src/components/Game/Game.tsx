@@ -66,7 +66,7 @@ class Game extends React.Component<{}, MyState> {
         Funds: ${this.state.money}
         <HappinessMeter happiness={companyHappiness(this.state.employees)}></HappinessMeter>
         <img width="100" src={this.state.candidate.picture}></img>
-        <Resume></Resume>
+        <Resume resume={this.state.candidate.resume}></Resume>
         <DenyButton resumeId={this.state.candidate.resume.resumeId}></DenyButton>
         <ApproveButton resumeId={this.state.candidate.resume.resumeId}></ApproveButton>
       </div>

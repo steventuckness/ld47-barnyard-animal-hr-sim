@@ -1,1 +1,34 @@
-.Resume {}
+.Resume {
+    display: flex;
+    flex-direction: column;
+}
+
+.Section {
+    display: flex;
+    flex-direction: column;
+}
+
+.SectionHead {
+    margin: 0;
+}
+
+.Company {
+    margin: 0;
+}
+
+.Block {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.Date {
+    margin-right: 2rem;
+}
+
+.List {
+    margin: 0;
+}
+
+.DetailBlock {
+
+}

@@ -1,4 +1,4 @@
-import { Employee } from "./models/employee";
+import { Employee } from './models/employee';
 
 type FreqDict = {[id: string]: number};
 
@@ -16,9 +16,9 @@ const filterDictByKeys = (keys: string[], dict: FreqDict) =>
  * a frequency table.
  */
 const frequency = (items: string[]): FreqDict =>
-  items.reduce((result, item) => 
-    result[item] 
-    ? {...result, [item]: result[item] + 1} 
+  items.reduce((result, item) =>
+    result[item]
+    ? {...result, [item]: result[item] + 1}
     : {...result, [item]: 1 }
     , {} as FreqDict);
 
@@ -32,7 +32,7 @@ const sumFreqs = (dictA: FreqDict, dictB: FreqDict): FreqDict => {
   return allKeysUnique.reduce(
     (result, k) => ({...result, [k]: (dictA[k] || 0) + (dictB[k] || 0)}),
     {} as FreqDict
-  ); 
+  );
 };
 
 /**
@@ -46,7 +46,7 @@ const divideFreqs = (dict: FreqDict, num: number): FreqDict =>
  * Frequency table of all personalities in the company.
  */
 const companyPersonalityFreq = (employees: Employee[]): FreqDict =>
-  employees.reduce((freq, emp) => 
+  employees.reduce((freq, emp) =>
     sumFreqs(freq, frequency(emp.personality))
     , {} as FreqDict
   );
@@ -54,14 +54,14 @@ const companyPersonalityFreq = (employees: Employee[]): FreqDict =>
 
 /**
  * An employee is happy if she is around people of the same species and
- * personality. The result is the average of the sum of the ratio of species and 
+ * personality. The result is the average of the sum of the ratio of species and
  * personalities of her same type that occur in the company.
  *
  * Because it's an average of ratios, it will be normalized by default (fall
  * between 0 and 1).
- * 
+ *
  */
-export const employeeHappiness = 
+export const employeeHappiness =
   (hired: Employee[]) => (employee: Employee): number => {
     const personalityFreq   = companyPersonalityFreq(hired);
     const personalityRatios = divideFreqs(personalityFreq, hired.length);
@@ -94,13 +94,13 @@ export const dailyIncome = (hired: Employee[]) : number =>
 /**
  * The sum of all salaries in the company.
  */
-export const dailyExpenses = (hired: Employee[]) : number => 
+export const dailyExpenses = (hired: Employee[]) : number =>
   hired.reduce((result, emp) => result + emp.salary, 0);
 
 /**
- * Calculates the daily profit based on the employees currently at the company. 
- * The skill determines the income, and the sum of salaries determines the 
+ * Calculates the daily profit based on the employees currently at the company.
+ * The skill determines the income, and the sum of salaries determines the
  * expenses.
  */
-export const dailyProfit = (hired: Employee[]): number => 
-  dailyIncome(hired) - dailyExpenses(hired);
+export const dailyProfit = (hired: Employee[]): number =>
+    dailyIncome(hired) - dailyExpenses(hired);
