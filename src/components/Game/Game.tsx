@@ -9,6 +9,7 @@ import ApproveButton from '../ApproveButton/ApproveButton';
 import Candidate from '../Candidate/Candidate';
 import Day from '../Day/Day';
 import DenyButton from '../DenyButton/DenyButton';
+import Funds from '../Funds/Funds';
 import HappinessMeter from '../HappinessMeter/HappinessMeter';
 import Resume from '../Resume/Resume';
 import styles from './Game.module.css';
@@ -23,43 +24,53 @@ type MyState = {
     skippedCandidates: CandidateModel[];
 };
 
-class Game extends React.Component<{}, MyState> {
+const initialState = {
+        money: 1200,
+        currentDay: 0,
+        candidate: generateCandidate(),
+        employees: [
+            {
+                personality: ['extrovert'],
+                salary: 128,
+                skills: [{ name: 'programmer', value: 32 }],
+                employeeId: 0,
+                resume: { resumeId: 0 },
+                name: 'bill',
+                species: 'sheep',
+            } as Employee,
+            {
+                personality: ['extrovert'],
+                salary: 100,
+                skills: [{ name: 'programmer', value: 48 }],
+                employeeId: 1,
+                resume: { resumeId: 1 },
+                name: 'jill',
+                species: 'swan',
+            } as Employee,
+        ],
+        skippedCandidates: [],
+    };
+
+
+class Game extends React.Component<{}, MyState> {    
+    goToNextDayTimer: any
+    
     constructor(props: {}) {
         super(props);
+        this.state = initialState
+    }
 
-        this.state = {
-            money: 1000,
-            currentDay: 0,
-            candidate: generateCandidate(),
-            employees: [
-                {
-                    personality: ['extrovert'],
-                    salary: 128,
-                    skills: [{ name: 'programmer', value: 32 }],
-                    employeeId: 0,
-                    resume: { resumeId: 0 },
-                    name: 'bill',
-                    species: 'sheep',
-                } as Employee,
-                {
-                    personality: ['extrovert'],
-                    salary: 100,
-                    skills: [{ name: 'programmer', value: 48 }],
-                    employeeId: 1,
-                    resume: { resumeId: 1 },
-                    name: 'jill',
-                    species: 'swan',
-                } as Employee,
-            ],
-            skippedCandidates: [],
-        };
+    reset(): void {
+        this.setState({...initialState, candidate: generateCandidate()});
+        clearInterval(this.goToNextDayTimer);
+        this.goToNextDayTimer = setInterval(() => this.goToNextDay(), dayIntervalInSeconds * 1000)
     }
 
     render() {
         return (
             <div className={styles.Game} data-testid="Game">
                 <Day currentDay={this.state.currentDay}></Day>
-                Funds: ${this.state.money}
+                <Funds money={this.state.money}></Funds>
                 <HappinessMeter
                     happiness={companyHappiness(this.state.employees)}
                 ></HappinessMeter>
@@ -94,15 +105,18 @@ class Game extends React.Component<{}, MyState> {
     }
 
     componentDidMount(): void {
-        setInterval(() => {
-            this.goToNextDay();
-        }, dayIntervalInSeconds * 1000);
+        this.goToNextDayTimer = setInterval(() => this.goToNextDay(), dayIntervalInSeconds * 1000)
     }
 
-    goToNextDay(): void {
+    goToNextDay(): void {        
         this.setState({
             currentDay: this.state.currentDay + 1,
             money: this.state.money + dailyProfit(this.state.employees),
+        }, () => {
+            if (this.state.money <= 0) {
+                alert('You are out of cash...starting over!');
+                this.reset();
+            }
         });
     }
 }
