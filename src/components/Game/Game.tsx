@@ -96,14 +96,10 @@ class Game extends React.Component<{}, MyState> {
                         </div>
                     </div>
                 ) : (
-                    <div>
-                        <GameOver
-                            finishGame={() =>
-                                clearInterval(this.goToNextDayTimer)
-                            }
-                            startOver={() => this.reset()}
-                        ></GameOver>
-                    </div>
+                    <GameOver
+                        finishGame={() => clearInterval(this.goToNextDayTimer)}
+                        startOver={() => this.reset()}
+                    ></GameOver>
                 )}
             </div>
         );
