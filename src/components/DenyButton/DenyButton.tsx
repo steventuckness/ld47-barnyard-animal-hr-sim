@@ -1,20 +1,17 @@
 import React from 'react';
+import { Candidate } from '../../models/candidate';
 
 import Button from '../Button/Button';
 import styles from './DenyButton.module.css';
 
-function handleClick(resumeId: number) {
-  console.log(`Denied resume ${resumeId}!`);
-}
-
 interface DenyButtonProps {
-  resumeId: number;
+  onClickFunc: () => void;
 }
 
 const DenyButton: React.FC<DenyButtonProps> = (props: DenyButtonProps) => (
   <Button
-    handleClick={() => handleClick(props.resumeId)}
-    label="Deny!"
+    handleClick={() => props.onClickFunc()}
+    label="Reject!"
     classes={[styles.DenyButton]}
   ></Button>
 );

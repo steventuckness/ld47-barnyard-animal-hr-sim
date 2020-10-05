@@ -3,7 +3,7 @@ import React from 'react';
 import { generateCandidate } from '../../generate_candidate';
 import { companyHappiness, dailyProfit } from '../../metrics';
 import Employee from '../../models/employee';
-import { Candidate as CandidateModel } from '../../models/candidate';
+import {Candidate as CandidateModel } from '../../models/candidate';
 import ApproveButton from '../ApproveButton/ApproveButton';
 import Candidate from '../Candidate/Candidate';
 import Day from '../Day/Day';
@@ -11,6 +11,7 @@ import DenyButton from '../DenyButton/DenyButton';
 import HappinessMeter from '../HappinessMeter/HappinessMeter';
 import Resume from '../Resume/Resume';
 import styles from './Game.module.css';
+import { generateEmployee } from '../../employee_generator';
 
 const dayIntervalInSeconds = 3;
 
@@ -18,7 +19,8 @@ type MyState = {
   money: number,
   currentDay: number,
   candidate: CandidateModel, // TODO:
-  employees: Employee[]
+  employees: Employee[],
+  skippedCandidates: CandidateModel[]
 }
 
 class Game extends React.Component<{}, MyState> {
@@ -52,7 +54,8 @@ class Game extends React.Component<{}, MyState> {
         name: 'jill',
         species: 'swan'
       } as Employee
-    ]
+    ],
+    skippedCandidates: []
     }
   }
 
@@ -66,10 +69,24 @@ class Game extends React.Component<{}, MyState> {
           <Candidate candidate={this.state.candidate}></Candidate>
           <Resume resume={this.state.candidate.resume}></Resume>  
         </div>
-        <DenyButton resumeId={this.state.candidate.resume.resumeId}></DenyButton>
-        <ApproveButton resumeId={this.state.candidate.resume.resumeId}></ApproveButton>
+        <DenyButton onClickFunc={() => this.rejectCandidate(this.state.candidate)}></DenyButton>
+        <ApproveButton onClickFunc={() => this.hireCandidate(this.state.candidate)}></ApproveButton>
       </div>
     );
+  }
+
+  hireCandidate(candidate: CandidateModel): void {    
+    this.setState({
+      employees: this.state.employees.concat(generateEmployee(candidate)),
+      candidate: generateCandidate()
+    });
+  }
+
+  rejectCandidate(candidate: CandidateModel): void {
+    this.setState({
+      skippedCandidates: this.state.skippedCandidates.concat(candidate),
+      candidate: generateCandidate()
+    })
   }
 
   componentDidMount(): void {
