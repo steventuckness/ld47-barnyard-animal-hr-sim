@@ -3,45 +3,22 @@ import { generateResume } from './resume_generator';
 import { Personality } from './types/personality';
 import { SkillName } from './types/skillname';
 import { Species } from './types/species';
+import faker from 'faker';
 
 const skillNames = ['writer', 'manager', 'programmer'];
 const speciesArray = ['sheep', 'chicken', 'cow', 'horse', 'pig', 'swan'];
 const personalityArray = ['extrovert', 'introvert', 'thinker', 'feeler'];
-const firstNames = [
-    'Jill',
-    'Joe',
-    'Mike',
-    'Rob',
-    'Robert',
-    'Bill',
-    'Jack',
-    'Sarah',
-    'Amanda',
-];
-const lastNames = [
-    'Smith',
-    'Jackson',
-    'Thompson',
-    'Johnson',
-    'Brown',
-    'Davis',
-    'Miller',
-    'Jones',
-    'Garcia',
-];
 
 export function generateCandidate(): Candidate {
     const species = speciesArray[getRandomInt(speciesArray.length)] as Species;
 
     return {
-        name: `${firstNames[getRandomInt(firstNames.length)]} ${
-            lastNames[getRandomInt(lastNames.length)]
-        }`,
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         species: species,
         skills: [
             {
                 name: skillNames[getRandomInt(skillNames.length)] as SkillName,
-                value: getRandomInt(200),
+                value: rand(0, 250),
             },
         ],
         personality: [
@@ -50,10 +27,14 @@ export function generateCandidate(): Candidate {
             ] as Personality,
         ],
         resume: generateResume(),
-        salary: getRandomInt(300),
+        salary: rand(50, 300),
     };
 }
 
 function getRandomInt(max: number) {
     return Math.floor(Math.random() * Math.floor(max));
 }
+
+const rand = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};

@@ -32,7 +32,7 @@ const initialState = {
     employees: [
         {
             personality: ['extrovert'],
-            salary: 128,
+            salary: 110,
             skills: [{ name: 'programmer', value: 32 }],
             employeeId: 0,
             resume: { resumeId: 0 },
@@ -41,7 +41,7 @@ const initialState = {
         } as Employee,
         {
             personality: ['extrovert'],
-            salary: 100,
+            salary: 75,
             skills: [{ name: 'programmer', value: 48 }],
             employeeId: 1,
             resume: { resumeId: 1 },
