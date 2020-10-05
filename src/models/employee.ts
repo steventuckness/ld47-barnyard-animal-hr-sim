@@ -1,6 +1,7 @@
 import { Candidate } from './candidate';
 
 export interface Employee extends Candidate {
-    employeeId: number}
+    employeeId: number;
+}
 
 export default Employee;

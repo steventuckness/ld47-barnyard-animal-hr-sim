@@ -5,10 +5,10 @@ export interface Resume {
         company: string;
         position: string;
         tasks: string[];
-    }>
+    }>;
     education: Array<{
         date: Date;
         school: string;
         tasks: string[];
     }>;
-};
+}

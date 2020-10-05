@@ -31,8 +31,8 @@ const lastNames = [
 ];
 
 export function generateCandidate(): Candidate {
-    const species = speciesArray[getRandomInt(speciesArray.length)] as Species; 
-    
+    const species = speciesArray[getRandomInt(speciesArray.length)] as Species;
+
     return {
         name: `${firstNames[getRandomInt(firstNames.length)]} ${
             lastNames[getRandomInt(lastNames.length)]
@@ -50,7 +50,7 @@ export function generateCandidate(): Candidate {
             ] as Personality,
         ],
         resume: generateResume(),
-        salary: getRandomInt(300)
+        salary: getRandomInt(300),
     };
 }
 
