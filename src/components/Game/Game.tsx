@@ -18,7 +18,7 @@ const dayIntervalInSeconds = 3;
 type MyState = {
     money: number;
     currentDay: number;
-    candidate: CandidateModel; // TODO:
+    candidate: CandidateModel;
     employees: Employee[];
     skippedCandidates: CandidateModel[];
 };

@@ -7,7 +7,7 @@ interface HappinessMeterProps {
 
 const HappinessMeter: React.FC<HappinessMeterProps> = (props: HappinessMeterProps) => (
   <div className={styles.HappinessMeter} data-testid="HappinessMeter">
-    Company Happiness: {props.happiness}
+    Company Happiness: {`${(props.happiness * 100).toFixed(2)}%`}
   </div>
 );
 
