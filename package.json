@@ -17,12 +17,27 @@
     "react-scripts": "3.4.3",
     "typescript": "^3.7.5"
   },
+  "homepage": "./",
+  "main": "src/start.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "nf start -p 3000",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-start": "node src/start-react",
+    "react-start": "cross-env BROWSER=none react-scripts start",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "install-app-deps",
     "format": "prettier --write \"./src/**/*.ts\""
+  },
+  "build": {
+    "appId": "com.electron.ld47-barnyard-animal-hr-sim",
+    "directories": {
+      "buildResources": "public"
+    },
+    "extends": null
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,6 +55,9 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
+    "electron": "^10.1.3",
+    "electron-builder": "^22.8.1",
     "prettier": "^2.1.2"
   }
 }
