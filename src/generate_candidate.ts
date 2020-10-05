@@ -41,7 +41,7 @@ export function generateCandidate(): Candidate {
         skills: [
             {
                 name: skillNames[getRandomInt(skillNames.length)] as SkillName,
-                value: getRandomInt(10),
+                value: getRandomInt(200),
             },
         ],
         personality: [
