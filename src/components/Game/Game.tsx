@@ -10,6 +10,7 @@ import Candidate from '../Candidate/Candidate';
 import Day from '../Day/Day';
 import DenyButton from '../DenyButton/DenyButton';
 import Funds from '../Funds/Funds';
+import GameOver from '../GameOver/GameOver';
 import HappinessMeter from '../HappinessMeter/HappinessMeter';
 import Resume from '../Resume/Resume';
 import styles from './Game.module.css';
@@ -25,67 +26,85 @@ type MyState = {
 };
 
 const initialState = {
-        money: 1200,
-        currentDay: 0,
-        candidate: generateCandidate(),
-        employees: [
-            {
-                personality: ['extrovert'],
-                salary: 128,
-                skills: [{ name: 'programmer', value: 32 }],
-                employeeId: 0,
-                resume: { resumeId: 0 },
-                name: 'bill',
-                species: 'sheep',
-            } as Employee,
-            {
-                personality: ['extrovert'],
-                salary: 100,
-                skills: [{ name: 'programmer', value: 48 }],
-                employeeId: 1,
-                resume: { resumeId: 1 },
-                name: 'jill',
-                species: 'swan',
-            } as Employee,
-        ],
-        skippedCandidates: [],
-    };
+    money: 1200,
+    currentDay: 0,
+    candidate: generateCandidate(),
+    employees: [
+        {
+            personality: ['extrovert'],
+            salary: 128,
+            skills: [{ name: 'programmer', value: 32 }],
+            employeeId: 0,
+            resume: { resumeId: 0 },
+            name: 'bill',
+            species: 'sheep',
+        } as Employee,
+        {
+            personality: ['extrovert'],
+            salary: 100,
+            skills: [{ name: 'programmer', value: 48 }],
+            employeeId: 1,
+            resume: { resumeId: 1 },
+            name: 'jill',
+            species: 'swan',
+        } as Employee,
+    ],
+    skippedCandidates: [],
+};
 
+class Game extends React.Component<{}, MyState> {
+    goToNextDayTimer: any;
 
-class Game extends React.Component<{}, MyState> {    
-    goToNextDayTimer: any
-    
     constructor(props: {}) {
         super(props);
-        this.state = initialState
+        this.state = initialState;
     }
 
     reset(): void {
-        this.setState({...initialState, candidate: generateCandidate()});
+        this.setState({ ...initialState, candidate: generateCandidate() });
         clearInterval(this.goToNextDayTimer);
-        this.goToNextDayTimer = setInterval(() => this.goToNextDay(), dayIntervalInSeconds * 1000)
+        this.intializeDayInterval();
     }
 
     render() {
         return (
             <div className={styles.Game} data-testid="Game">
-                <Day currentDay={this.state.currentDay}></Day>
-                <Funds money={this.state.money}></Funds>
-                <HappinessMeter
-                    happiness={companyHappiness(this.state.employees)}
-                ></HappinessMeter>
-                <DenyButton
-                    onClickFunc={() =>
-                        this.rejectCandidate(this.state.candidate)
-                    }
-                ></DenyButton>
-                <ApproveButton
-                    onClickFunc={() => this.hireCandidate(this.state.candidate)}
-                ></ApproveButton>
-                <div className={styles.CandidateAndResume}>
-                    <Candidate candidate={this.state.candidate}></Candidate>
-                    <Resume resume={this.state.candidate.resume}></Resume>
-                </div>
+                {this.state.money > 0 ? (
+                    <div>
+                        <Day currentDay={this.state.currentDay}></Day>
+                        <Funds money={this.state.money}></Funds>
+                        <HappinessMeter
+                            happiness={companyHappiness(this.state.employees)}
+                        ></HappinessMeter>
+                        <DenyButton
+                            onClickFunc={() =>
+                                this.rejectCandidate(this.state.candidate)
+                            }
+                        ></DenyButton>
+                        <ApproveButton
+                            onClickFunc={() =>
+                                this.hireCandidate(this.state.candidate)
+                            }
+                        ></ApproveButton>
+                        <div className={styles.CandidateAndResume}>
+                            <Candidate
+                                candidate={this.state.candidate}
+                            ></Candidate>
+                            <Resume
+                                resume={this.state.candidate.resume}
+                            ></Resume>
+                        </div>
+                    </div>
+                ) : (
+                    <div>
+                        <GameOver
+                            finishGame={() =>
+                                clearInterval(this.goToNextDayTimer)
+                            }
+                            startOver={() => this.reset()}
+                        ></GameOver>
+                    </div>
+                )}
             </div>
         );
     }
@@ -105,18 +124,20 @@ class Game extends React.Component<{}, MyState> {
     }
 
     componentDidMount(): void {
-        this.goToNextDayTimer = setInterval(() => this.goToNextDay(), dayIntervalInSeconds * 1000)
+        this.intializeDayInterval();
     }
 
-    goToNextDay(): void {        
+    intializeDayInterval(): void {
+        this.goToNextDayTimer = setInterval(
+            () => this.goToNextDay(),
+            dayIntervalInSeconds * 1000
+        );
+    }
+
+    goToNextDay(): void {
         this.setState({
             currentDay: this.state.currentDay + 1,
             money: this.state.money + dailyProfit(this.state.employees),
-        }, () => {
-            if (this.state.money <= 0) {
-                alert('You are out of cash...starting over!');
-                this.reset();
-            }
         });
     }
 }

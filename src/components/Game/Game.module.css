@@ -1,5 +1,7 @@
-.Game {}
+.Game {
+    padding: 5px 10px;
+}
 
 .CandidateAndResume {
-  display: flex;
+    display: flex;
 }
