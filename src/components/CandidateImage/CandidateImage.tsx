@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Candidate } from '../../models/candidate';
-import styles from './CandidateImage.module.css';
+import styles from './CandidateImage.module.scss';
 
 interface CandidateImageProps {
     candidate: Candidate;

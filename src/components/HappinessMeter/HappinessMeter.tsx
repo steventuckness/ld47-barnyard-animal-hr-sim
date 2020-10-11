@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './HappinessMeter.module.css';
+import styles from './HappinessMeter.module.scss';
 
 interface HappinessMeterProps {
   happiness: number;

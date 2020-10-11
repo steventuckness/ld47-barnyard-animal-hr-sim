@@ -13,7 +13,7 @@ import Funds from '../Funds/Funds';
 import GameOver from '../GameOver/GameOver';
 import HappinessMeter from '../HappinessMeter/HappinessMeter';
 import Resume from '../Resume/Resume';
-import styles from './Game.module.css';
+import styles from './Game.module.scss';
 
 const dayIntervalInSeconds = 3;
 

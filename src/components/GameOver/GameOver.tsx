@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './GameOver.module.css';
+import styles from './GameOver.module.scss';
 
 interface GameOverProps {
     finishGame: () => void;

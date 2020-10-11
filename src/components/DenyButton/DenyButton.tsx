@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from '../Button/Button';
-import styles from './DenyButton.module.css';
+import styles from './DenyButton.module.scss';
 
 interface DenyButtonProps {
   onClickFunc: () => void;

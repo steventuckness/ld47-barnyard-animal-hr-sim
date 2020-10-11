@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from '../Button/Button';
-import styles from './ApproveButton.module.css';
+import styles from './ApproveButton.module.scss';
 
 interface ApproveButtonProps {
   onClickFunc: any;

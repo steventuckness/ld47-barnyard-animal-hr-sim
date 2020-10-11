@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Funds.module.css';
+import styles from './Funds.module.scss';
 
 export interface FundsProps {
   money: number;

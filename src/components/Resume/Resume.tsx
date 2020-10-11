@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Resume.module.css';
+import styles from './Resume.module.scss';
 import { Resume as ResumeModel } from '../../models/resume';
 
 type Props = {

@@ -3,7 +3,7 @@ import React from 'react';
 import { Candidate as CandidateModel } from '../../models/candidate';
 import { Skill } from '../../models/skill';
 import CandidateImage from '../CandidateImage/CandidateImage';
-import styles from './Candidate.module.css';
+import styles from './Candidate.module.scss';
 
 export interface CandidateProps {
     candidate: CandidateModel;
