@@ -1,5 +1,4 @@
 import React from 'react';
-import { Candidate } from '../../models/candidate';
 
 import Button from '../Button/Button';
 import styles from './DenyButton.module.css';

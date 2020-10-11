@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './HappinessMeter.module.css';
 
 interface HappinessMeterProps {
-  happiness: any; // TODO: Fix type.
+  happiness: number;
 }
 
 const HappinessMeter: React.FC<HappinessMeterProps> = (props: HappinessMeterProps) => (
